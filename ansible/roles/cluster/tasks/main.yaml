@@ -1,0 +1,8 @@
+---
+
+- import_tasks: initCluster.yaml
+  tags: cluster
+- import_tasks: installCNI.yaml
+  tags: cluster
+- import_tasks: copyJoinClusterCommand.yaml
+  tags: cluster

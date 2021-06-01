@@ -1,0 +1,16 @@
+---
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - kubernetes
+    - cluster
+
+- hosts: workers
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - kubernetes
+    - joinCluster

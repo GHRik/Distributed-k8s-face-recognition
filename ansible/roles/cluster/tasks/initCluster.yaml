@@ -1,0 +1,21 @@
+- name: Initialize the Kubernetes cluster using kubeadm
+  command: kubeadm init --apiserver-advertise-address={{ kubernetes_master_node_ip }} --apiserver-cert-extra-sans={{ kubernetes_master_node_ip }}  --pod-network-cidr={{ cluster_cni_ip }}
+
+- name: Setup kubeconfig for user
+  command: "{{ item }}"
+  with_items:
+   - mkdir -p /home/{{user_name}}/.kube
+   - sudo cp -i /etc/kubernetes/admin.conf /home/{{user_name}}/.kube/config
+   - sudo chown {{ user_name }}:{{ user_name }} $HOME/.kube/config
+
+- name: Export KUBECONFIG
+  shell: export KUBECONFIG=/etc/kubernetes/admin.conf
+
+- name: insert export to bashrc
+  lineinfile:
+    path: $HOME/.bashrc
+    line: 'export KUBECONFIG=/etc/kubernetes/admin.conf'
+    insertbefore: BOF
+
+- name: source bashrc
+  shell: . $HOME/.bashrc
