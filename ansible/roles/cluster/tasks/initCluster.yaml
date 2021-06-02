@@ -11,11 +11,14 @@
 - name: Export KUBECONFIG
   shell: export KUBECONFIG=/etc/kubernetes/admin.conf
 
-- name: insert export to bashrc
+- name: Insert export to bashrc
   lineinfile:
     path: $HOME/.bashrc
     line: 'export KUBECONFIG=/etc/kubernetes/admin.conf'
     insertbefore: BOF
 
-- name: source bashrc
+- name: Source bashrc
   shell: . $HOME/.bashrc
+
+- name: Taint master node
+  command: kubectl taint node master-node node-role.kubernetes.io/master:NoSchedule-
