@@ -1,0 +1,7 @@
+- name: Install mysql
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - kubectl create configmap db-bootstrap --from-file=kube_files/database_setup.sql
+    - kubectl create -f kube_files/secret.yaml
+    - kubectl create -f kube_files/mysql.yaml

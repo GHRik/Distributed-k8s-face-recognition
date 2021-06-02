@@ -6,6 +6,7 @@
   roles:
     - kubernetes
     - cluster
+    - deploy
 
 - hosts: workers
   become_user: root
@@ -14,3 +15,21 @@
   roles:
     - kubernetes
     - joinCluster
+
+
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - destroy
+  tags: [never,destroy]
+
+- hosts: master,workers
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - destroy_cluster
+  tags: [never, destroy_cluster]
+

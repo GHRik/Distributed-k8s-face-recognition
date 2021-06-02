@@ -1,0 +1,20 @@
+- name: Create folder with images
+  command: "{{ item }}"
+  with_items:
+   - sudo cp -r known_people /tmp/
+   - sudo cp -r unknown_people /tmp/
+
+- name: Add label to master-node
+  command: kubectl label nodes master-node local-pvc=true
+  ignore_errors: yes
+
+- name: Install face_recognition deployment
+  command: "{{ item }}"
+  with_items:
+   - kubectl apply -f kube_files/face_recognition.yaml
+   - kubectl apply -f kube_files/face_recognition_pv_known.yaml
+   - kubectl apply -f kube_files/face_recognition_pv_unknown.yaml
+   - kubectl apply -f kube_files/face_recognition_pvc_known.yaml
+   - kubectl apply -f kube_files/face_recognition_pvc_unknown.yaml
+
+

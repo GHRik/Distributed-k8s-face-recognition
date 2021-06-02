@@ -1,0 +1,10 @@
+- name: Destroy face_recognition deployment
+  command: "{{ item }}"
+  with_items:
+   - kubectl delete -f kube_files/face_recognition.yaml
+   - kubectl delete -f kube_files/face_recognition_pvc_known.yaml
+   - kubectl delete -f kube_files/face_recognition_pvc_unknown.yaml
+   - kubectl delete -f kube_files/face_recognition_pv_known.yaml
+   - kubectl delete -f kube_files/face_recognition_pv_unknown.yaml
+
+

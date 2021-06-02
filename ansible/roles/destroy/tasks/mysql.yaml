@@ -1,0 +1,7 @@
+- name: Destroy mysql
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - kubectl delete configmap db-bootstrap
+    - kubectl delete -f kube_files/secret.yaml
+    - kubectl delete -f kube_files/mysql.yaml
