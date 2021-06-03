@@ -2,13 +2,17 @@ FROM nvidia/cuda:9.0-cudnn7-devel
 
 # Install face recognition dependencies
 
+RUN apt update -y
+RUN apt install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+
 RUN apt update -y; apt install -y \
 git \
 cmake \
 libsm6 \
 libxext6 \
 libxrender-dev \
-python3 \
+python3.7 \
 python3-pip
 
 RUN pip3 install scikit-build
@@ -34,8 +38,12 @@ RUN cmake --build /dlib/build
 RUN cd /dlib; python3 /dlib/setup.py install
 
 # Install the face recognition package
-
-RUN pip3 install face_recognition
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
+RUN update-alternatives --set python /usr/bin/python3.7
+RUN python3.7 -m pip install pillow==7.2.0
+RUN python3.7 -m pip install numpy==1.20.3
+RUN apt-get install -y python3.7-dev
+RUN python3.7 -m pip install face_recognition
 RUN python3 -m pip install grpcio
 RUN python3 -m pip install grpcio-tools
 
@@ -47,4 +55,4 @@ VOLUME [ "/unknown_people", "/known_people" ]
 
 EXPOSE 50051
 
-CMD [ "python3", "/root/identifier.py" ]
+CMD [ "python3.7", "/root/identifier.py" ]
