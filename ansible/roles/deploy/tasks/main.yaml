@@ -4,21 +4,21 @@
   tags: deploy
 
 - name: Install nsqlookup
-  command: kubectl apply -f kube_files/nsqlookup.yaml
+  command: kubectl create -f kube_files/nsqlookup.yaml
   tags: deploy
 
 - name: Install receiver
-  command: kubectl apply -f kube_files/receiver.yaml
+  command: kubectl create -f kube_files/receiver.yaml
   tags: deploy
 
 - name: Install image processor
-  command: kubectl apply -f kube_files/image_processor.yaml
+  command: kubectl create -f kube_files/image_processor.yaml
   tags: deploy
 
 - import_tasks: face_recognition.yaml
   tags: deploy
 
 - name: Install fontend
-  command: kubectl apply -f kube_files/frontend.yaml
+  command: kubectl create -f kube_files/frontend.yaml
   tags: deploy
 
