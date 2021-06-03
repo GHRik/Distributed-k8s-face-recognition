@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: face-recog
-        image: ghrik/face-recognition:1.0
+        image: ghrik/face_recognition:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 50051
