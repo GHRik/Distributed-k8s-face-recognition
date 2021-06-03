@@ -19,6 +19,7 @@
       - kubelet 
       - kubeadm 
       - kubectl
+      - sshpass
 
 - name: Restart kubelet
   service:
