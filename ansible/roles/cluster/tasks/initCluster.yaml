@@ -1,12 +1,12 @@
 - name: Initialize the Kubernetes cluster using kubeadm
-  command: kubeadm init --apiserver-advertise-address={{ kubernetes_master_node_ip }} --apiserver-cert-extra-sans={{ kubernetes_master_node_ip }}  --pod-network-cidr={{ cluster_cni_ip }}
+  command: kubeadm init --apiserver-advertise-address={{ kubernetes_master_node_ip }} --apiserver-cert-extra-sans={{ kubernetes_master_node_ip }}  --pod-network-cidr={{ cluster_cni_ip }} --node-name master-node
 
 - name: Setup kubeconfig for user
   command: "{{ item }}"
   with_items:
    - mkdir -p /home/{{user_name}}/.kube
    - sudo cp -i /etc/kubernetes/admin.conf /home/{{user_name}}/.kube/config
-   - sudo chown {{ user_name }}:{{ user_name }} $HOME/.kube/config
+   - sudo chown {{ user_name }}:{{ user_name }} /home/{{user_name}}/.kube/config
 
 - name: Export KUBECONFIG
   shell: export KUBECONFIG=/etc/kubernetes/admin.conf
