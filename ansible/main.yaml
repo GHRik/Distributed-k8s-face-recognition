@@ -16,6 +16,13 @@
     - kubernetes
     - joinCluster
 
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - recognize
+ 
 
 - hosts: master
   become_user: root
