@@ -45,7 +45,7 @@ spec:
       volumes:
       - name: known-people-storage
         persistentVolumeClaim:
-          claimName: face-recognition-pvc-known
+          claimName: face-recognition-pv-known
       - name: unknown-people-storage
         persistentVolumeClaim:
-          claimName: face-recognition-pvc-unknown
+          claimName: face-recognition-pv-unknown
