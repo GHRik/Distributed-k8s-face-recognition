@@ -4,9 +4,9 @@
 - name: Setup kubeconfig for user
   command: "{{ item }}"
   with_items:
-   - mkdir -p /home/{{user_name}}/.kube
-   - sudo cp -i /etc/kubernetes/admin.conf /home/{{user_name}}/.kube/config
-   - sudo chown {{ user_name }}:{{ user_name }} /home/{{user_name}}/.kube/config
+   - mkdir -p $HOME/.kube
+   - sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   - sudo chown {{ user_name }}:{{ user_name }} $HOME/.kube/config
 
 - name: Export KUBECONFIG
   shell: export KUBECONFIG=/etc/kubernetes/admin.conf
