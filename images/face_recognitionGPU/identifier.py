@@ -16,7 +16,7 @@ class Identifer(face_pb2_grpc.IdentifyServicer):
     UnknownEncoding = None
 
     def Identify(self, request, context):
-        path = request.image_pat
+        path = request.image_path
         t0 = time.time()
         image_name = self.identify(path)
         t1 = time.time()
