@@ -1,4 +1,4 @@
-FROM nvidia/cuda:6.0-cudnn7-devel
+FROM nvidia/cuda:11.3.0-devel-ubuntu18.04
 
 # Install face recognition dependencies
 
@@ -28,7 +28,8 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 50
 
 #Install dlib 
 
-RUN pip3 install -Iv setuptools==50.3.0
+
+RUN python3.7 -m pip install setuptools==50.3.0
 RUN git clone -b 'v19.17' --single-branch https://github.com/davisking/dlib.git
 RUN mkdir -p /dlib/build
 RUN apt-get install -y python3.7-dev
@@ -44,8 +45,8 @@ RUN python3.7 -m pip install pillow==7.2.0
 RUN python3.7 -m pip install numpy==1.20.3
 RUN apt-get install -y python3.7-dev
 RUN python3.7 -m pip install face_recognition
-RUN python3 -m pip install grpcio
-RUN python3 -m pip install grpcio-tools
+RUN python3.7 -m pip install grpcio
+RUN python3.7 -m pip install grpcio-tools
 
 COPY face_pb2_grpc.py /root
 COPY face_pb2.py /root
