@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel
+FROM nvidia/cuda:6.0-cudnn7-devel
 
 # Install face recognition dependencies
 
@@ -31,11 +31,11 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 50
 RUN pip3 install -Iv setuptools==50.3.0
 RUN git clone -b 'v19.17' --single-branch https://github.com/davisking/dlib.git
 RUN mkdir -p /dlib/build
-
-RUN cmake -H/dlib -B/dlib/build -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
+RUN apt-get install -y python3.7-dev
+RUN cmake -H/dlib -B/dlib/build -DDLIB_USE_CUDA=1 -DUSE_SSE4_INSTRUCTIONS=1 -DUSE_AVX_INSTRUCTIONS=0 ;
 RUN cmake --build /dlib/build
 
-RUN cd /dlib; python3 /dlib/setup.py install
+RUN cd /dlib; python3.7 /dlib/setup.py install --no USE_AVX_INSTRUCTIONS
 
 # Install the face recognition package
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
