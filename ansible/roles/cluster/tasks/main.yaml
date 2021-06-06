@@ -4,5 +4,10 @@
   tags: cluster
 - import_tasks: installCNI.yaml
   tags: cluster
+
+- name: Install nvidia docker plugin
+  shell: "kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/1.0.0-beta4/nvidia-device-plugin.yml"
+  tags: cluster
+
 - import_tasks: copyJoinClusterCommand.yaml
   tags: cluster
