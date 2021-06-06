@@ -1,10 +1,10 @@
 ---
-- name: wait all pods to get up
+- name: wait all pods to get up(if new cluster - will be check about 5min)
   shell: kubectl get pods -o json
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout|from_json|json_query('items[*].status.phase')|unique == ["Running"]
-  retries: 6
-  delay: 10
+  retries: 12
+  delay: 30
   tags: recognize
 
 - name: Get receiver-service ip
