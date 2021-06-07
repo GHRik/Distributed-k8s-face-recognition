@@ -118,7 +118,7 @@ the calculated time it takes to recognize a given face
 
 The first line from ***result.txt*** is a ip to frontend site.
 On this site you will see what faces have been recognized.
-![Example](?https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/example.PNG?raw=true)
+![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/example.PNG?raw=true)
 
 <a name="prep">.</a>
 ## Prepare your own face database
