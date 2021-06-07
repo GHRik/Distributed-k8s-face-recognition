@@ -32,7 +32,7 @@ This repo is reworked code from [this repo](https://github.com/Skarlso/kube-clus
 2. [cuda](https://developer.nvidia.com/cuda-zone) - to accelerate GPU card
 3. [ansible](https://www.ansible.com/) - to automatization create cluster
 4. [kubernetes](https://kubernetes.io/) - to create cluster
-5. [my docker hub repo]((https://hub.docker.com/repository/registry-1.docker.io/ghrik/face_recognition/tags?page=1&ordering=last_updated)) - to store builded images
+5. [my docker hub repo](https://hub.docker.com/repository/registry-1.docker.io/ghrik/face_recognition/tags?page=1&ordering=last_updated) - to store built images
 6. [kubernetes-sample-cluster](https://github.com/Skarlso/kube-cluster-sample) - to pattern code
 7. [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) - to passthrought my gpu to containers
 8. [Microsoft azure cloud](https://azure.microsoft.com/) - for testing
