@@ -188,27 +188,27 @@ In any case of error check for the first ***image_processor*** pod
 kubectl logs image_processor
 ```
 - List_out_of range <br />
-Probably one of images (from ***unknown/known_people)*** does not have any face
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Probably one of images (from ***unknown/known_people)*** does not have any face
 to recognize. In this case image_processor cant process this image.
 
 - ***Image_processor*** is not up <br />
-Sometimes a ***image_processor*** must have a more time to get up.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes a ***image_processor*** must have a more time to get up.
 You can see it if you run new cluster. Pulling image to pod can take a long time
 
 - No such file or directory on image processor pod__
-Sometimes ***face_recog_unknown_pvc*** is connected to ***face_recog_known_pv***,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes ***face_recog_unknown_pvc*** is connected to ***face_recog_known_pv***,
 rerun with "redeploy" tag
 
 - ***dont_delete*** dir in unknown_people <br />
-Dont delete ***end.jpg*** , it is corelated with show time all recognized faces.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dont delete ***end.jpg*** , it is corelated with show time all recognized faces.
 
-- Sleep 60 in recognize__
-Sometimes a other services need more time to get up.
+- Sleep 60 in recognize <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes a other services need more time to get up.
 To fast deploy you can comment "sleep 60", and after failed deploy recognize, 
 rerun with tag: "recognize"
 
 - Circuitbreaker is engaged <br />
-It means you have more than 5images in ***unknown_people*** dir. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It means you have more than 5images in ***unknown_people*** dir. 
 Probably it will unfreeze if not, you can add sleep function in
 ```
 ansible/roles/recognize/tasks/main.yaml
@@ -218,7 +218,7 @@ ansible/roles/recognize/tasks/main.yaml
 Or add fewer face pictures ;)
 
 - Core dump using without CUDA image <br />
-***ghrik/face_recognition:1.0*** was builded with AVX acceleration.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***ghrik/face_recognition:1.0*** was builded with AVX acceleration.
 All of CUDA images is using SSE4 (not AVX)
 If you want to use dlib without AVX acceleration check flags in dlib section:
 ```
