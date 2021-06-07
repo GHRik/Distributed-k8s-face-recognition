@@ -26,6 +26,9 @@ Full automatization deploy k8s cluster with 1master node and 3workers.
 
 This repo is reworked code from [this repo](https://github.com/Skarlso/kube-cluster-sample) so if you want any info about components or how everything works together , check [this link](https://cheppers.com/deploying-distributed-face-recognition-application-kubernetes)
 
+If you still dont know how it works, maybe this diagram will help you ;)
+![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/processSchema.jpg?raw=true)
+
 <a name="tech">.</a>
 ## Used technology:
 1. [dlib](http://dlib.net/) - module to recognize face
