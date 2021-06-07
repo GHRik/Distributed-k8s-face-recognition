@@ -127,6 +127,25 @@ Results are in two pleaces:
 ***Result.txt*** - If ansible end properly this file will be fill with 
 the calculated time it takes to recognize a given face
 
+```
+$ cat results/results.txt
+
+Server is on: http://10.98.219.249:8081
+LOGS:
+Checking image: unknown_people/unknown_02.PNG
+Time: 0.4799957275390625 sec.
+
+Checking image: unknown_people/unknown_03.PNG
+Time: 0.6136119365692139 sec.
+
+Checking image: unknown_people/unknown_04.PNG
+Time: 0.5596208572387695 sec.
+
+Checking image: unknown_people/unknown_01.PNG
+Time: 0.46269893646240234 sec.
+
+```
+
 The first line from ***result.txt*** is a ip to frontend site.
 On this site you will see what faces have been recognized.
 ![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/example.PNG?raw=true)
@@ -168,27 +187,27 @@ In any case of error check for the first ***image_processor*** pod
 ```
 kubectl logs image_processor
 ```
-### List_out_of range
+- List_out_of range
 Probably one of images (from ***unknown/known_people)*** does not have any face
 to recognize. In this case image_processor cant process this image.
 
-### ***Image_processor*** is not up
+- ***Image_processor*** is not up
 Sometimes a ***image_processor*** must have a more time to get up.
 You can see it if you run new cluster. Pulling image to pod can take a long time
 
-### No such file or directory on image processor pod
+- No such file or directory on image processor pod
 Sometimes ***face_recog_unknown_pvc*** is connected to ***face_recog_known_pv***,
 rerun with "redeploy" tag
 
-### ***dont_delete*** dir in unknown_people
+- ***dont_delete*** dir in unknown_people
 Dont delete ***end.jpg*** , it is corelated with show time all recognized faces.
 
-### Sleep 60 in recognize
+- Sleep 60 in recognize
 Sometimes a other services need more time to get up.
 To fast deploy you can comment "sleep 60", and after failed deploy recognize, 
 rerun with tag: "recognize"
 
-### Circuitbreaker is engaged
+- Circuitbreaker is engaged
 It means you have more than 5images in ***unknown_people*** dir. 
 Probably it will unfreeze if not, you can add sleep function in
 ```
@@ -210,6 +229,6 @@ and colerate this with
 images/face_recognition/Dockerfile
 ```
 
-<a name="lic>.</a>
+<a name="lic">.</a>
 #License
 Free to use ;)
