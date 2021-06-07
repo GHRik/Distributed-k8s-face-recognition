@@ -2,13 +2,15 @@
 
 ## Table of contents
 1. [ Quick Start ](#quick)
-2. [ Helping tags ](#gags)  
-2. [ Describe ](#desc)
-3. [ CUDA Support ](#supp) 
-4. [ Example Result ](#res)
-5. [ Prepare your own face database ](#prep)
-6. [ Debug/Known Bugs](#bugs)
-7. [ License ](#lic)
+2. [ Describe ](#gags)
+3. [ Used technology](#tech)
+4. [ Helping ansible tags ](#desc)
+5. [ CUDA Support ](#supp)
+6. [ Without CUDA ](#without)
+7. [ Example Result ](#res)
+8. [ Prepare your own face database ](#prep)
+9. [ Debug/Known Bugs](#bugs)
+10. [ License ](#lic)
 
 <a name "quick">.</a>
 ## Quick Start
@@ -17,14 +19,14 @@ To deploy:
 ```
 ansible-playbook -i inventory.yaml main.yaml
 ```
-<a name "desc">.</a>
+<a name="desc">.</a>
 ## Describe
 
 Full automatization deploy k8s cluster with 1master node and 3workers.
 
 This repo is reworked code from [this repo](https://github.com/Skarlso/kube-cluster-sample) so if you want any info about components or how everything works together , check [this link](https://cheppers.com/deploying-distributed-face-recognition-application-kubernetes)
 
-<a name "gags">.</a>
+<a name="gags">.</a>
 ## Helping ansible tags
 
 To deploy this code you can use ansible tags:
@@ -57,7 +59,7 @@ ansible-playbook -i inventory.yaml main.yaml --tags "destroy_cluster"
 ansible-playbook -i inventory.yaml main.yaml
 ```
 
-<a name "sup">.</a>
+<a name="sup">.</a>
 ## Cuda Support
 This code support CUDA. In this case if you want deploy this cluster with CUDA support:
 
@@ -95,7 +97,19 @@ face_recognition.yaml
 ```
 This script using [nvida-docker](https://github.com/NVIDIA/nvidia-docker) to deploy GPU Scheduling on k8s cluster. In this case **you should uninstall your docker if you have**.
 
-<a name "res">.</a>
+
+<a name="without">.</a>
+## Without CUDA Support
+You can run this cluster without CUDA.
+
+In this case you have to change
+```
+face_recognition.yaml
+
+30: image: ghrik/face_recognition:1.0
+```
+
+<a name="res">.</a>
 ## Result from example
 Results are in two pleaces:
 
@@ -104,9 +118,9 @@ the calculated time it takes to recognize a given face
 
 The first line from ***result.txt*** is a ip to frontend site.
 On this site you will see what faces have been recognized.
-[Example](https://github.com/GHRik/PomocnaLiterka/blob/main/examplePNGForVid/Arbiter.PNG)
+![Example](https://github.com/GHRik/PomocnaLiterka/blob/main/examplePNGForVid/Arbiter.PNG?raw=true)
 
-<a name "prep">.</a>
+<a name="prep">.</a>
 ## Prepare your own face database
 As you can see this cluster is checking only faces in ***unknown_people*** dir.
 To make your own database with face you change do a small change in
@@ -137,7 +151,7 @@ insert into person_images (image_name, person_id) values ('lewy_01.PNG', 4);
 insert into person_images (image_name, person_id) values ('lewy_02.PNG', 4);
 ```
 
-<a name "bugs">.</a>
+<a name="bugs">.</a>
 ## Debug / Known Bugs
 In any case of error check for the first ***image_processor*** pod
 ```
@@ -167,3 +181,18 @@ ansible/roles/recognize/tasks/main.yaml
 45: shell: curl -d '{"path":"unknown_people/dont_delete/end.jpg"}' http://{{ receiver_ip.stdout }}:8000/image/post
 ```
 Or add fewer face pictures ;)
+7. Core dump using without CUDA image
+***ghrik/face_recognition:1.0*** was builded without AVX acceleration.
+All of CUDA images is using SSE4
+If you want to use dlib without AVX acceleration check flags in dlib section:
+```
+images/face_recognitionGPU/Dockerfile
+```
+and colerate this with
+```
+images/face_recognition/Dockerfile
+```
+
+<a name="lic>.</a>
+#License
+Free to use ;)
