@@ -199,8 +199,8 @@ ansible/roles/recognize/tasks/main.yaml
 Or add fewer face pictures ;)
 
 ### Core dump using without CUDA image
-***ghrik/face_recognition:1.0*** was builded without AVX acceleration.
-All of CUDA images is using SSE4
+***ghrik/face_recognition:1.0*** was builded with AVX acceleration.
+All of CUDA images is using SSE4 (not AVX)
 If you want to use dlib without AVX acceleration check flags in dlib section:
 ```
 images/face_recognitionGPU/Dockerfile
