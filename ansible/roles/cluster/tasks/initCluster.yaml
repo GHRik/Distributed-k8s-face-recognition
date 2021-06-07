@@ -21,4 +21,9 @@
   shell: . $HOME/.bashrc
 
 - name: Taint master node
-  command: kubectl taint node master-node node-role.kubernetes.io/master:NoSchedule-
+  shell: kubectl taint node master-node node-role.kubernetes.io/master:NoSchedule-
+  retries: 12
+  delay: 30
+  register: error_info
+  until: error_info.rc == 0
+
