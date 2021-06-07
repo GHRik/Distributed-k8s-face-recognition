@@ -168,28 +168,27 @@ In any case of error check for the first ***image_processor*** pod
 ```
 kubectl logs image_processor
 ```
-1. List_out_of range
-
+### List_out_of range
 Probably one of images (from ***unknown/known_people)*** does not have any face
 to recognize. In this case image_processor cant process this image.
-2. ***Image_processor*** is not up
 
+### ***Image_processor*** is not up
 Sometimes a ***image_processor*** must have a more time to get up.
 You can see it if you run new cluster. Pulling image to pod can take a long time
-3. no such file or directory on image processor pod
 
+### No such file or directory on image processor pod
 Sometimes ***face_recog_unknown_pvc*** is connected to ***face_recog_known_pv***,
 rerun with "redeploy" tag
-4. ***dont_delete*** dir in unknown_people
 
+### ***dont_delete*** dir in unknown_people
 Dont delete ***end.jpg*** , it is corelated with show time all recognized faces.
-5. Sleep 60 in recognize
 
+### Sleep 60 in recognize
 Sometimes a other services need more time to get up.
 To fast deploy you can comment "sleep 60", and after failed deploy recognize, 
 rerun with tag: "recognize"
-6. Circuitbreaker is engaged
 
+### Circuitbreaker is engaged
 It means you have more than 5images in ***unknown_people*** dir. 
 Probably it will unfreeze if not, you can add sleep function in
 ```
@@ -198,7 +197,8 @@ ansible/roles/recognize/tasks/main.yaml
 45: shell: curl -d '{"path":"unknown_people/dont_delete/end.jpg"}' http://{{ receiver_ip.stdout }}:8000/image/post
 ```
 Or add fewer face pictures ;)
-7. Core dump using without CUDA image
+
+### Core dump using without CUDA image
 ***ghrik/face_recognition:1.0*** was builded without AVX acceleration.
 All of CUDA images is using SSE4
 If you want to use dlib without AVX acceleration check flags in dlib section:
