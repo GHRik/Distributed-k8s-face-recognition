@@ -73,7 +73,7 @@ ansible-playbook -i inventory.yaml main.yaml --tags "destroy_cluster"
 ansible-playbook -i inventory.yaml main.yaml
 ```
 
-<a name="sup">.</a>
+<a name="supp">.</a>
 ## Cuda Support
 This code support CUDA. In this case if you want deploy this cluster with CUDA support:
 
