@@ -1,8 +1,8 @@
+# Distributed face recognition
+## _Using kubernetes cluster_
+
 ![Cuda](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/cuda_logo.png?raw=true)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Dlib](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/dlib_logo.png?raw=true)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![k8s](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/kubernetes_logo.png?raw=true)
 
-
-# Distributed face recognition
-## Using kubernetes cluster
 
 ## Table of contents
 1. [ Quick Start ](#quick)
