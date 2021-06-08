@@ -2,9 +2,9 @@
 
 ## Table of contents
 1. [ Quick Start ](#quick)
-2. [ Describe ](#gags)
+2. [ Describe ](#desc)
 3. [ Used technology](#tech)
-4. [ Helping ansible tags ](#desc)
+4. [ Helping ansible tags ](#gags)
 5. [ CUDA Support ](#supp)
 6. [ Without CUDA ](#without)
 7. [ Example Result ](#res)
