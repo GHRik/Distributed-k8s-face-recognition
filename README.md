@@ -17,6 +17,8 @@
 
 To deploy:
 ```sh
+git clone https://github.com/GHRik/Disturbed-k8s-face-recognition.git
+cd Disturbed-k8s-face-recognition/ansible
 ansible-playbook -i inventory.yaml main.yaml
 ```
 <a name="desc">.</a>
