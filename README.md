@@ -2,15 +2,16 @@
 
 ## Table of contents
 1. [ Quick Start ](#quick)
-2. [ Describe ](#desc)
-3. [ Used technology](#tech)
-4. [ Helping ansible tags ](#gags)
-5. [ CUDA Support ](#supp)
-6. [ Without CUDA ](#without)
-7. [ Example Result ](#res)
-8. [ Prepare your own face database ](#prep)
-9. [ Debug/Known Bugs](#bugs)
-10. [ License ](#lic)
+2. [Features](#fea)
+3. [ Describe ](#desc)
+4. [ Used technology](#tech)
+5. [ Helping ansible tags ](#gags)
+6. [ CUDA Support ](#supp)
+7. [ Without CUDA ](#without)
+8. [ Example Result ](#res)
+9. [ Prepare your own face database ](#prep)
+10. [ Debug/Known Bugs](#bugs)
+11. [ License ](#lic)
 
 <a name="quick">.</a>
 ## Quick Start
@@ -21,19 +22,28 @@ git clone https://github.com/GHRik/Distributed-k8s-face-recognition.git
 cd Distributed-k8s-face-recognition/ansible
 ansible-playbook -i inventory.yaml main.yaml
 ```
+
+<a name="fea">.</a>
+## Features
+Full automatization deploy:
+
+- install [kubernetes](https://kubernetes.io/) and [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) pkg
+-  Create cluster with [calcio CNI](https://www.projectcalico.org/) and [nvidia GPU scheduling](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/#deploying-nvidia-gpu-device-plugin)
+- Deploy  [kubernetes](https://kubernetes.io/) resource (check [describe section](https://github.com/GHRik/Distributed-k8s-face-recognition/tree/master#desc)
+- Support CUDA 9.2, 10.0, 10.1, 10.2 11.0, 11.0.3, 11.1, 11.1.1, 11.3
+- Recognize face as distrubuted way
+
 <a name="desc">.</a>
 ## Describe
 
-Full automatization deploy k8s cluster with 1master node and 3workers.
-
-This repo is reworked code from [this repo](https://github.com/Skarlso/kube-cluster-sample) so if you want any info about components or how everything works together , check [this link](https://cheppers.com/deploying-distributed-face-recognition-application-kubernetes)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This repo is reworked code from [this repo](https://github.com/Skarlso/kube-cluster-sample) so if you want any info about components or how everything works together , check [this link](https://cheppers.com/deploying-distributed-face-recognition-application-kubernetes)
 
 If you still dont know how it works, maybe this diagram will help you ;)
 ![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/processSchema.jpg?raw=true)
 
 ### Where is distrubuted?
 
-[dlib](http://dlib.net/) have a Pool thread using to find face
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dlib](http://dlib.net/) have a Pool thread using to find face
 ![dis](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/distributed.PNG?raw=true)
 
 <a name="tech">.</a>
@@ -46,11 +56,12 @@ If you still dont know how it works, maybe this diagram will help you ;)
 6. [kubernetes-sample-cluster](https://github.com/Skarlso/kube-cluster-sample) - to pattern code
 7. [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) - to passthrought my gpu to containers
 8. [Microsoft azure cloud](https://azure.microsoft.com/) - for testing
+9. [Calico](https://www.projectcalico.org/) - as CNI k8s plugin
 
 <a name="gags">.</a>
 ## Helping ansible tags
 
-To deploy this code you can use ansible tags:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To deploy this code you can use ansible tags:
 
 ...
 
@@ -94,7 +105,7 @@ ansible-playbook -i inventory.yaml main.yaml --tags: "destroy"
 
 <a name="supp">.</a>
 ## Cuda Support
-This code support CUDA. In this case if you want deploy this cluster with CUDA support:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This code support CUDA. In this case if you want deploy this cluster with CUDA support:
 
 Check your GPU - which version CUDA your GPU is using
 ```sh
@@ -133,7 +144,7 @@ This script using [nvida-docker](https://github.com/NVIDIA/nvidia-docker) to dep
 
 <a name="without">.</a>
 ## Without CUDA Support
-You can run this cluster without CUDA.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can run this cluster without CUDA.
 
 In this case you have to change
 ```sh
@@ -144,7 +155,7 @@ face_recognition.yaml
 
 <a name="res">.</a>
 ## Result from example
-Results are in two pleaces:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Results are in two pleaces:
 
 ***Result.txt*** - If ansible end properly this file will be fill with 
 the calculated time it takes to recognize a given face
@@ -174,7 +185,7 @@ On this site you will see what faces have been recognized.
 
 <a name="prep">.</a>
 ## Prepare your own face database
-As you can see this cluster is checking only faces in ***unknown_people*** dir.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As you can see this cluster is checking only faces in ***unknown_people*** dir.
 To make your own database with face you change do a small change in
 ```sh
 ansible/kube_files/database_setup.sql
@@ -205,7 +216,7 @@ insert into person_images (image_name, person_id) values ('lewy_02.PNG', 4);
 
 <a name="bugs">.</a>
 ## Debug / Known Bugs
-In any case of error check for the first ***image_processor*** pod
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In any case of error check for the first ***image_processor*** pod
 ```sh
 kubectl logs image_processor
 ```
@@ -253,4 +264,4 @@ images/face_recognition/Dockerfile
 
 <a name="lic">.</a>
 ## License
-Free to use ;)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free to use ;)
