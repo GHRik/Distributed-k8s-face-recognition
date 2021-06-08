@@ -45,15 +45,18 @@ If you still dont know how it works, maybe this diagram will help you ;)
 
 To deploy this code you can use ansible tags:
 
+
 No install [nvida-docker](https://github.com/NVIDIA/nvidia-docker) and kubernetes packages
 ```
 ansible-playbook -i inventory.yaml main.yaml
 ```
 
-Have cluster, but dont have deploy cluster from this repo
+
+Have cluster, but dont have deploy cluster face fecogniton from this repo
 ```
 ansible-playbook -i inventory.yaml main.yaml --tags "deploy"
 ```
+
 
 Have cluster, have deployed face recognition from this repo,
 but you make changes on kube files or known/unknown people images
@@ -61,16 +64,24 @@ but you make changes on kube files or known/unknown people images
 ansible-playbook -i inventory.yaml main.yaml --tags "redeploy"
 ```
 
+
 Have cluster, this face regoznition deployed, but images not load
 or is an error in "recognize" role
 ```
 ansible-playbook -i inventory.yaml main.yaml --tags "recognize"
 ```
 
+
 Have cluster before , have deployed face recognition, but want to recreate cluster
 ```
 ansible-playbook -i inventory.yaml main.yaml --tags "destroy_cluster" 
 ansible-playbook -i inventory.yaml main.yaml
+```
+
+
+Have deployed face recognition cluster, but want clear it:
+```
+ansible-playbook -i inventory.yaml main.yaml --tags: "destroy"
 ```
 
 <a name="supp">.</a>
@@ -216,7 +227,9 @@ Probably it will unfreeze if not, you can add sleep function in
 ```
 ansible/roles/recognize/tasks/main.yaml
 
-45: shell: curl -d '{"path":"unknown_people/dont_delete/end.jpg"}' http://{{ receiver_ip.stdout }}:8000/image/post
+40: shell: sleep 10 && curl -d '{"path":"{{ item.path }}"}' http://{{ receiver_ip.stdout }}:8000/image/post
+
+
 ```
 Or add fewer face pictures ;)
 
