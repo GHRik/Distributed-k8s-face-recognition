@@ -1,4 +1,8 @@
-# Deploy k8s cluster with face recognition features (support CUDA)
+![Cuda](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/cuda_logo.png?raw=true)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Dlib](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/dlib_logo.png?raw=true)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![k8s](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/kubernetes_logo.png?raw=true)
+
+
+# Distributed face recognition
+## Using kubernetes cluster
 
 ## Table of contents
 1. [ Quick Start ](#quick)
@@ -39,12 +43,12 @@ Full automatization deploy:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This repo is reworked code from [this repo](https://github.com/Skarlso/kube-cluster-sample) so if you want any info about components or how everything works together , check [this link](https://cheppers.com/deploying-distributed-face-recognition-application-kubernetes)
 
 If you still dont know how it works, maybe this diagram will help you ;)
-![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/processSchema.jpg?raw=true)
+![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/processSchema.jpg?raw=true)
 
 ### Where is distrubuted?
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dlib](http://dlib.net/) have a Pool thread using to find face
-![dis](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/distributed.PNG?raw=true)
+![dis](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/distributed.PNG?raw=true)
 
 <a name="tech">.</a>
 ## Used technology:
@@ -181,7 +185,7 @@ Time: 0.46269893646240234 sec.
 
 The first line from ***result.txt*** is a ip to frontend site.
 On this site you will see what faces have been recognized.
-![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/example.PNG?raw=true)
+![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/example.PNG?raw=true)
 
 <a name="prep">.</a>
 ## Prepare your own face database
