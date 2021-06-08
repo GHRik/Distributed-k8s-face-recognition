@@ -17,7 +17,7 @@
 10. [ Debug/Known Bugs](#bugs)
 11. [ License ](#lic)
 
-<a name="quick">.</a>
+<a name="quick"></a>
 ## Quick Start
 
 To deploy:
@@ -37,7 +37,7 @@ Full automatization deploy:
 - Support CUDA 9.2, 10.0, 10.1, 10.2 11.0, 11.0.3, 11.1, 11.1.1, 11.3
 - Recognize face as distrubuted way
 
-<a name="desc">.</a>
+<a name="desc"></a>
 ## Describe
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This repo is reworked code from [this repo](https://github.com/Skarlso/kube-cluster-sample) so if you want any info about components or how everything works together , check [this link](https://cheppers.com/deploying-distributed-face-recognition-application-kubernetes)
@@ -50,7 +50,7 @@ If you still dont know how it works, maybe this diagram will help you ;)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dlib](http://dlib.net/) have a Pool thread using to find face
 ![dis](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/distributed.PNG?raw=true)
 
-<a name="tech">.</a>
+<a name="tech"></a>
 ## Used technology:
 1. [dlib](http://dlib.net/) - module to recognize face
 2. [cuda](https://developer.nvidia.com/cuda-zone) - to accelerate GPU card
@@ -62,7 +62,7 @@ If you still dont know how it works, maybe this diagram will help you ;)
 8. [Microsoft azure cloud](https://azure.microsoft.com/) - for testing
 9. [Calico](https://www.projectcalico.org/) - as CNI k8s plugin
 
-<a name="gags">.</a>
+<a name="gags"></a>
 ## Helping ansible tags
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To deploy this code you can use ansible tags:
@@ -107,7 +107,7 @@ Have deployed face recognition cluster, but want clear it:
 ansible-playbook -i inventory.yaml main.yaml --tags: "destroy"
 ```
 
-<a name="supp">.</a>
+<a name="supp"></a>
 ## Cuda Support
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This code support CUDA. In this case if you want deploy this cluster with CUDA support:
 
@@ -146,7 +146,7 @@ face_recognition.yaml
 This script using [nvida-docker](https://github.com/NVIDIA/nvidia-docker) to deploy GPU Scheduling on k8s cluster. In this case **you should uninstall your docker if you have**.
 
 
-<a name="without">.</a>
+<a name="without"></a>
 ## Without CUDA Support
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can run this cluster without CUDA.
 
@@ -157,7 +157,7 @@ face_recognition.yaml
 30: image: ghrik/face_recognition:1.0
 ```
 
-<a name="res">.</a>
+<a name="res"></a>
 ## Result from example
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Results are in two pleaces:
 
@@ -187,7 +187,7 @@ The first line from ***result.txt*** is a ip to frontend site.
 On this site you will see what faces have been recognized.
 ![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/example.PNG?raw=true)
 
-<a name="prep">.</a>
+<a name="prep"></a>
 ## Prepare your own face database
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As you can see this cluster is checking only faces in ***unknown_people*** dir.
 To make your own database with face you change do a small change in
@@ -218,7 +218,7 @@ insert into person_images (image_name, person_id) values ('lewy_01.PNG', 4);
 insert into person_images (image_name, person_id) values ('lewy_02.PNG', 4);
 ```
 
-<a name="bugs">.</a>
+<a name="bugs"></a>
 ## Debug / Known Bugs
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In any case of error check for the first ***image_processor*** pod
 ```sh
@@ -266,6 +266,6 @@ and colerate this with
 images/face_recognition/Dockerfile
 ```
 
-<a name="lic">.</a>
+<a name="lic"></a>
 ## License
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free to use ;)
