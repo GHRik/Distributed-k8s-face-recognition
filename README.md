@@ -45,7 +45,7 @@ If you still dont know how it works, maybe this diagram will help you ;)
 
 To deploy this code you can use ansible tags:
 
-
+...
 No install [nvida-docker](https://github.com/NVIDIA/nvidia-docker) and kubernetes packages
 ```sh
 ansible-playbook -i inventory.yaml main.yaml
