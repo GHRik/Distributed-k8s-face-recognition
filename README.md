@@ -198,7 +198,7 @@ to recognize. In this case image_processor cant process this image.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes a ***image_processor*** must have a more time to get up.
 You can see it if you run new cluster. Pulling image to pod can take a long time
 
-- No such file or directory on image processor pod__
+- No such file or directory on image processor pod <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes ***face_recog_unknown_pvc*** is connected to ***face_recog_known_pv***,
 rerun with "redeploy" tag
 
