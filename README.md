@@ -31,6 +31,11 @@ This repo is reworked code from [this repo](https://github.com/Skarlso/kube-clus
 If you still dont know how it works, maybe this diagram will help you ;)
 ![Example](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/processSchema.jpg?raw=true)
 
+### Where is distrubuted?
+
+[dlib](http://dlib.net/) have a Pool thread using to find face
+![dis](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/distributed.PNG?raw=true)
+
 <a name="tech">.</a>
 ## Used technology:
 1. [dlib](http://dlib.net/) - module to recognize face
