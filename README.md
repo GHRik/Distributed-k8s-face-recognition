@@ -7,8 +7,8 @@
 ## Table of contents
 1. [ Quick Start ](#quick)
 2. [Features](#fea)
-3. [ Describe ](#desc)
-4. [ Used technology](#tech)
+3. [ Used technology](#tech)
+4. [ Describe ](#desc)
 5. [ Helping ansible tags ](#gags)
 6. [ CUDA Support ](#supp)
 7. [ Without CUDA ](#without)
@@ -37,6 +37,18 @@ Full automatization deploy:
 - Support CUDA 9.2, 10.0, 10.1, 10.2 11.0, 11.0.3, 11.1, 11.1.1, 11.3
 - Recognize face as distrubuted way
 
+<a name="tech"></a>
+## Used technology:
+1. [dlib](http://dlib.net/) - module to recognize face
+2. [cuda](https://developer.nvidia.com/cuda-zone) - to accelerate GPU card
+3. [ansible](https://www.ansible.com/) - to automatization create cluster
+4. [kubernetes](https://kubernetes.io/) - to create cluster
+5. [my docker hub repo](https://hub.docker.com/repository/registry-1.docker.io/ghrik/face_recognition/tags?page=1&ordering=last_updated) - to store built images
+6. [kubernetes-sample-cluster](https://github.com/Skarlso/kube-cluster-sample) - to pattern code
+7. [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) - to passthrought my gpu to containers
+8. [Microsoft azure cloud](https://azure.microsoft.com/) - for testing
+9. [Calico](https://www.projectcalico.org/) - as CNI k8s plugin
+
 <a name="desc"></a>
 ## Describe
 
@@ -49,18 +61,6 @@ If you still dont know how it works, maybe this diagram will help you ;)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dlib](http://dlib.net/) have a Pool thread using to find face
 ![dis](https://github.com/GHRik/Disturbed-k8s-face-recognition/blob/master/need_jpg/distributed.PNG?raw=true)
-
-<a name="tech"></a>
-## Used technology:
-1. [dlib](http://dlib.net/) - module to recognize face
-2. [cuda](https://developer.nvidia.com/cuda-zone) - to accelerate GPU card
-3. [ansible](https://www.ansible.com/) - to automatization create cluster
-4. [kubernetes](https://kubernetes.io/) - to create cluster
-5. [my docker hub repo](https://hub.docker.com/repository/registry-1.docker.io/ghrik/face_recognition/tags?page=1&ordering=last_updated) - to store built images
-6. [kubernetes-sample-cluster](https://github.com/Skarlso/kube-cluster-sample) - to pattern code
-7. [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) - to passthrought my gpu to containers
-8. [Microsoft azure cloud](https://azure.microsoft.com/) - for testing
-9. [Calico](https://www.projectcalico.org/) - as CNI k8s plugin
 
 <a name="gags"></a>
 ## Helping ansible tags
