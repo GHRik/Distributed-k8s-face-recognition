@@ -27,7 +27,7 @@ cd Distributed-k8s-face-recognition/ansible
 ansible-playbook -i inventory.yaml main.yaml
 ```
 
-<a name="fea">.</a>
+<a name="fea"></a>
 ## Features
 Full automatization deploy:
 
