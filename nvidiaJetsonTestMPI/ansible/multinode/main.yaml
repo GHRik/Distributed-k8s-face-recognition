@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Install necesary packages
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - python3-pip
+        - python-pip
+        - mpich
+        - mpi-default-dev
+
+    - name: Install jtop
+      pip:
+        name: jetson_stats
+
+    - name: Start jtop
+      systemd:
+        state: restarted
+        enabled: yes
+        name: jetson_stats.service
+
+    - name: Copy binary simpleMPI
+      copy:
+        src: "{{ inventory_dir }}/bin/simpleMPI"
+        dest: /usr/bin/simpleMPI
+        mode: u=rwx,g=rwx,o=rwx
