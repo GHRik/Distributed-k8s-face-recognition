@@ -1,0 +1,72 @@
+---
+- name: wait all pods to get up(if new cluster - will be check about 5min)
+  shell: kubectl get pods -o json
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout|from_json|json_query('items[*].status.phase')|unique == ["Running"]
+  retries: 12
+  delay: 30
+  tags: recognize
+
+- name: Get receiver-service ip
+  shell: "kubectl get services | grep receiver-service | awk {'print $3'}"
+  register: receiver_ip
+  tags: recognize
+
+- name: Get unknown images to recognize
+  find:
+    paths: unknown_people/
+    recurse: no
+    file_type: file
+  register: unknown_list
+  tags: recognize
+
+- name: Get imageprocessor pod
+  shell: "kubectl get pods | grep image | awk {'print $1'}"
+  register: image_pod
+  tags: recognize
+
+- name: Wait until imageprocessor service start
+  shell: "kubectl logs {{ image_pod.stdout }}"
+  register: image_log
+  until: image_log.stdout.find("404") != -1
+  retries: 6
+  delay: 20
+  tags: recognize
+
+- name: Wait until all other services start
+  shell: "sleep 60"
+ 
+- name: Send unknow images to image-processor
+  shell: curl -d '{"path":"{{ item.path }}"}' http://{{ receiver_ip.stdout }}:8000/image/post
+  with_items: "{{ unknown_list.files }}"
+  tags: recognize
+
+- name: Send end images to image-processor
+  shell: curl -d '{"path":"unknown_people/dont_delete/end.jpg"}' http://{{ receiver_ip.stdout }}:8000/image/post
+  tags: recognize
+
+- name: Get face-recog pods
+  shell: "kubectl get pods | grep face-recog | awk {'print $1'}"
+  register: face_pod
+  tags: recognize
+
+- name: Get logs from face-recog pod(until the last image will be loaded)
+  shell: "kubectl logs {{ face_pod.stdout }}"
+  register: face_log
+  until: face_log.stdout.find("end.jpg") != -1
+  retries: 6
+  delay: 20
+  tags: recognize
+
+- name: Get frontend ip
+  shell: "kubectl get services | grep frontend | awk {'print $3'}"
+  register: front_ip
+  tags: recognize
+
+- name: Insert to result
+  copy:
+    content: "Server is on: http://{{ front_ip.stdout }}:8081 \n\nLOGS:\n\n{{ face_log.stdout }}"
+    dest: results/results.txt
+  tags: recognize
+
+

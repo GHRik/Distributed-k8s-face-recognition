@@ -1,0 +1,8 @@
+---
+
+- import_tasks: installDocker.yaml
+  tags: kubernetes
+- import_tasks: swapoff.yaml
+  tags: kubernetes
+- import_tasks: installKubernetes.yaml
+  tags: kubernetes

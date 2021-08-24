@@ -1,0 +1,30 @@
+---
+
+- import_tasks: mysql.yaml
+  ignore_errors: yes
+  tags: destroy
+
+- name: Destroy nsqlookup
+  command: kubectl delete -f kube_files/nsqlookup.yaml
+  ignore_errors: yes
+  tags: destroy
+
+- name: Destroy receiver
+  command: kubectl delete -f kube_files/receiver.yaml
+  ignore_errors: yes
+  tags: destroy
+
+- name: Destroy image processor
+  command: kubectl delete -f kube_files/image_processor.yaml
+  ignore_errors: yes
+  tags: destroy
+
+- import_tasks: face_recognition.yaml
+  ignore_errors: yes
+  tags: destroy
+
+- name: Destroy fontend
+  command: kubectl delete -f kube_files/frontend.yaml
+  ignore_errors: yes
+  tags: destroy
+

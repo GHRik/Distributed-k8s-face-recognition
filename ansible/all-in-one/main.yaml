@@ -1,0 +1,43 @@
+---
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - kubernetes
+    - cluster
+    - deploy
+
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - recognize
+ 
+
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - destroy
+  tags: [never,destroy]
+
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - destroy_cluster
+  tags: [never, destroy_cluster]
+
+- hosts: master
+  become_user: root
+  become: yes
+  become_method: sudo
+  roles:
+    - destroy
+    - deploy
+  tags: [never, redeploy]
+

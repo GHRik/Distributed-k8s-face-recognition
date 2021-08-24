@@ -1,0 +1,1 @@
+kubeadm join 100.105.1.78:6443 --token ohy5og.uuwfm9m7wor46n7d --discovery-token-ca-cert-hash sha256:c97e235416be9c351fb4db1e0bf7a04ab12a9fb506162dec738413bf45bcb369 

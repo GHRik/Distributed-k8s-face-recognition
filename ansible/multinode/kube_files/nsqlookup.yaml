@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nsqlookup
+spec:
+  ports:
+  - name: main
+    protocol: TCP
+    port: 4160
+    targetPort: 4160
+  - name: secondary
+    protocol: TCP
+    port: 4161
+    targetPort: 4161
+  selector:
+    app: nsqlookup
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nsqlookup
+spec:
+  selector:
+    matchLabels:
+      app: nsqlookup
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nsqlookup
+    spec:
+      containers:
+      - name: nsqlookup
+        image: nsqio/nsq
+        imagePullPolicy: Always
+        command: ["/nsqlookupd"]
+        args: ["--broadcast-address=nsqlookup.default.svc.cluster.local"]
+        ports:
+        - containerPort: 4160
+          hostPort: 4160
+        - containerPort: 4161
+          hostPort: 4161

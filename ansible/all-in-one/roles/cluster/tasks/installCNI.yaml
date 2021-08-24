@@ -1,0 +1,5 @@
+- name: Install calico pod network
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - kubectl create -f https://docs.projectcalico.org/manifests/calico.yaml

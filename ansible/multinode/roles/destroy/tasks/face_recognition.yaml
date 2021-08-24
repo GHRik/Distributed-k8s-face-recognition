@@ -1,0 +1,22 @@
+- name: Delete /tmp/known_people
+  file:
+    path: /tmp/known_people
+    state: absent
+
+- name: Delete /tmp/unknown_people
+  file:
+    path: /tmp/unknown_people
+    state: absent
+
+
+- name: Destroy face_recognition deployment
+  command: "{{ item }}"
+  with_items:
+   - kubectl delete -f kube_files/face_recognition.yaml
+   - kubectl delete -f kube_files/face_recognition_pvc_known.yaml
+   - kubectl delete -f kube_files/face_recognition_pvc_unknown.yaml
+   - kubectl delete -f kube_files/face_recognition_pv_known.yaml
+   - kubectl delete -f kube_files/face_recognition_pv_unknown.yaml
+
+
+

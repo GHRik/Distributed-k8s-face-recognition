@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: receiver-service
+spec:
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  selector:
+    app: receiver
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nsqd
+spec:
+  ports:
+  - name: main
+    protocol: TCP
+    port: 4150
+    targetPort: 4150
+  - name: secondary
+    protocol: TCP
+    port: 4151
+    targetPort: 4151
+  selector:
+    app: nsqd
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: receiver-deployment
+spec:
+  selector:
+    matchLabels:
+      app: receiver
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: receiver
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+      - name: receiver
+        image: ghrik/receiver:latest
+        ports:
+        - containerPort: 8000
+          hostPort: 8000
+        args:
+          - --db-host=mysql.default.svc.cluster.local
+          - --db-username-password=$(MYSQL_USERPASSWORD)
+          - --db-port=3306
+          - --db-dbname=kube
+          - --producer-address=nsqd.default.svc.cluster.local:4150
+        env:
+        - name: MYSQL_USERPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: kube-face-secret
+              key: mysql_userpassword
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nsqd
+spec:
+  selector:
+    matchLabels:
+      app: nsqd
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nsqd
+    spec:
+      containers:
+      # Note, since nsq persists information on disk via .dat file it might be advicable to store those
+      # in a mount.
+      - name: nsqd
+        image: nsqio/nsq
+        ports:
+        - containerPort: 4150
+          hostPort: 4150
+        - containerPort: 4151
+          hostPort: 4151
+        env:
+        - name: NSQLOOKUP_ADDRESS
+          value: nsqlookup.default.svc.cluster.local
+        - name: NSQ_BROADCAST_ADDRESS
+          value: nsqd.default.svc.cluster.local
+        command: ["/nsqd"]
+        args: ["--lookupd-tcp-address=$(NSQLOOKUP_ADDRESS):4160", "--broadcast-address=$(NSQ_BROADCAST_ADDRESS)"]

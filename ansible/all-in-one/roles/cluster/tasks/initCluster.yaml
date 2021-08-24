@@ -1,0 +1,29 @@
+- name: Initialize the Kubernetes cluster using kubeadm
+  command: kubeadm init --pod-network-cidr={{ cluster_cni_ip }} --node-name master-node
+
+- name: Setup kubeconfig for user
+  command: "{{ item }}"
+  with_items:
+   - mkdir -p $HOME/.kube
+   - sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   - sudo chown {{ user_name }}:{{ user_name }} $HOME/.kube/config
+
+- name: Export KUBECONFIG
+  shell: export KUBECONFIG=/etc/kubernetes/admin.conf
+
+- name: Insert export to bashrc
+  lineinfile:
+    path: $HOME/.bashrc
+    line: 'export KUBECONFIG=/etc/kubernetes/admin.conf'
+    insertbefore: BOF
+
+- name: Source bashrc
+  shell: . $HOME/.bashrc
+
+- name: Taint master node
+  shell: kubectl taint node master-node node-role.kubernetes.io/master:NoSchedule-
+  retries: 12
+  delay: 30
+  register: error_info
+  until: error_info.rc == 0
+

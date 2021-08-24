@@ -1,0 +1,24 @@
+---
+
+- import_tasks: mysql.yaml
+  tags: deploy
+
+- name: Install nsqlookup
+  command: kubectl create -f kube_files/nsqlookup.yaml
+  tags: deploy
+
+- name: Install receiver
+  command: kubectl create -f kube_files/receiver.yaml
+  tags: deploy
+
+- name: Install image processor
+  command: kubectl create -f kube_files/image_processor.yaml
+  tags: deploy
+
+- import_tasks: face_recognition.yaml
+  tags: deploy
+
+- name: Install fontend
+  command: kubectl create -f kube_files/frontend.yaml
+  tags: deploy
+
